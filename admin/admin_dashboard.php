@@ -48,35 +48,39 @@ while ($row = $status_result->fetch_assoc()) {
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Admin Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- AOS CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - HungerHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
+  <style>
     .sidebar {
       min-height: 100vh;
-      background-color: #343a40;
-      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-    .sidebar a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      padding: 10px 20px;
+    .sidebar .nav-link {
+      color: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      margin: 2px 0;
     }
 
-    .sidebar a:hover {
-      background-color: #495057;
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-card {
+      border-radius: 15px;
+      border: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
     }
 
     .profile-img {
@@ -84,192 +88,219 @@ while ($row = $status_result->fetch_assoc()) {
       height: 80px;
       object-fit: cover;
       border-radius: 50%;
-      border: 2px solid white;
+      border: 3px solid rgba(255, 255, 255, 0.3);
     }
 
-    .border-left-primary {
-      border-left: 4px solid #007bff;
+    .table-responsive {
+      border-radius: 10px;
+      overflow: hidden;
     }
 
-    .border-left-success {
-      border-left: 4px solid #28a745;
+    .order-status {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
-    .border-left-warning {
-      border-left: 4px solid #ffc107;
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
     }
 
-    .border-left-info {
-      border-left: 4px solid #17a2b8;
+    .status-confirmed {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-preparing {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .status-ready {
+      background: #e2e3e5;
+      color: #383d41;
+    }
+
+    .status-delivered {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-cancelled {
+      background: #f8d7da;
+      color: #721c24;
     }
   </style>
 </head>
 
 <body>
-
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
-      <div class="col-md-3 sidebar d-flex flex-column p-4" data-aos="fade-right">
+      <div class="col-md-2 sidebar p-3">
         <div class="text-center mb-4">
           <img src="../uploads/<?php echo htmlspecialchars($profile_img); ?>" class="profile-img mb-2" alt="Admin Image" />
-          <h5><?php echo $_SESSION['admin_name']; ?></h5>
+          <h6 class="text-white"><?php echo $_SESSION['admin_name']; ?></h6>
         </div>
-        <nav>
-          <a href="admin_dashboard.php">Dashboard</a>
-          <a href="orders.php">Orders</a>
-          <a href="menu_items.php">Menu Items</a>
-          <a href="customers.php">Customers</a>
-          <a href="messages.php">Messages</a>
-          <a href="logout.php" class="mt-auto text-danger">Logout</a>
-        </nav>
 
+        <h4 class="text-white mb-4">
+          <i class="fas fa-utensils me-2"></i>HungerHub Admin
+        </h4>
+
+        <nav class="nav flex-column">
+          <a class="nav-link active" href="admin_dashboard.php">
+            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+          </a>
+          <a class="nav-link" href="orders.php">
+            <i class="fas fa-shopping-bag me-2"></i>Orders
+          </a>
+          <a class="nav-link" href="menu_items.php">
+            <i class="fas fa-utensils me-2"></i>Menu Items
+          </a>
+          <a class="nav-link" href="payments.php">
+            <i class="fas fa-credit-card me-2"></i>Payments
+          </a>
+          <a class="nav-link" href="customers.php">
+            <i class="fas fa-users me-2"></i>Customers
+          </a>
+          <a class="nav-link" href="messages.php">
+            <i class="fas fa-envelope me-2"></i>Messages
+          </a>
+          <hr class="text-white-50">
+          <a class="nav-link" href="logout.php">
+            <i class="fas fa-sign-out-alt me-2"></i>Logout
+          </a>
+        </nav>
       </div>
 
       <!-- Main Content -->
-      <div class="col-md-9 p-4" data-aos="fade-up">
-        <h2 class="mb-4">Admin Dashboard</h2>
+      <div class="col-md-10 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2><i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard</h2>
+          <div class="text-muted">
+            <i class="fas fa-calendar me-1"></i><?= date('M d, Y') ?>
+          </div>
+        </div>
 
         <!-- Statistics Cards -->
-        <div class="row g-4 mb-4">
+        <div class="row mb-4">
           <div class="col-md-3">
-            <div class="card shadow text-center p-3 border-left-primary">
-              <h4><i class="fas fa-shopping-cart text-primary"></i> Total Orders</h4>
-              <p class="display-6 text-primary"><?= $stats['total_orders'] ?></p>
+            <div class="card stat-card text-center">
+              <div class="card-body">
+                <i class="fas fa-shopping-bag fa-2x text-primary mb-2"></i>
+                <h5><?= number_format($stats['total_orders']) ?></h5>
+                <small class="text-muted">Total Orders</small>
+              </div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="card shadow text-center p-3 border-left-success">
-              <h4><i class="fas fa-utensils text-success"></i> Menu Items</h4>
-              <p class="display-6 text-success"><?= $stats['total_items'] ?></p>
+            <div class="card stat-card text-center">
+              <div class="card-body">
+                <i class="fas fa-utensils fa-2x text-success mb-2"></i>
+                <h5><?= number_format($stats['total_items']) ?></h5>
+                <small class="text-muted">Menu Items</small>
+              </div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="card shadow text-center p-3 border-left-warning">
-              <h4><i class="fas fa-users text-warning"></i> Total Users</h4>
-              <p class="display-6 text-warning"><?= $stats['total_users'] ?></p>
+            <div class="card stat-card text-center">
+              <div class="card-body">
+                <i class="fas fa-users fa-2x text-warning mb-2"></i>
+                <h5><?= number_format($stats['total_users']) ?></h5>
+                <small class="text-muted">Total Users</small>
+              </div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="card shadow text-center p-3 border-left-info">
-              <h4><i class="fas fa-rupee-sign text-info"></i> Revenue</h4>
-              <p class="display-6 text-info">₹<?= number_format($stats['total_revenue'], 0) ?></p>
+            <div class="card stat-card text-center">
+              <div class="card-body">
+                <i class="fas fa-money-bill-wave fa-2x text-info mb-2"></i>
+                <h5>₹<?= number_format($stats['total_revenue'], 2) ?></h5>
+                <small class="text-muted">Total Revenue</small>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Order Status Overview -->
-        <div class="row g-4 mb-4">
-          <div class="col-md-6">
-            <div class="card shadow p-3">
-              <h5 class="card-title"><i class="fas fa-chart-pie"></i> Order Status Overview</h5>
-              <div class="table-responsive">
-                <table class="table table-sm">
-                  <thead>
+        <!-- Recent Orders -->
+        <div class="card mb-4">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-clock me-2"></i>Recent Orders</h5>
+            <a href="orders.php" class="btn btn-sm btn-primary">View All Orders</a>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php while ($order = $recent_orders->fetch_assoc()): ?>
                     <tr>
-                      <th>Status</th>
-                      <th>Count</th>
+                      <td>#<?= $order['id'] ?></td>
+                      <td><?= htmlspecialchars($order['user_name'] ?? $order['customer_name'] ?? 'Guest') ?></td>
+                      <td>₹<?= number_format($order['total'], 2) ?></td>
+                      <td>
+                        <span class="order-status status-<?= strtolower($order['status']) ?>">
+                          <?= $order['status'] ?>
+                        </span>
+                      </td>
+                      <td><?= date('M d, Y', strtotime($order['created_at'])) ?></td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($order_status as $status => $count): ?>
-                      <tr>
-                        <td>
-                          <?php
-                          $badge_color = '';
-                          switch ($status) {
-                            case 'Pending':
-                              $badge_color = 'warning';
-                              break;
-                            case 'Confirmed':
-                              $badge_color = 'info';
-                              break;
-                            case 'Preparing':
-                              $badge_color = 'primary';
-                              break;
-                            case 'Ready':
-                              $badge_color = 'success';
-                              break;
-                            case 'Out for Delivery':
-                              $badge_color = 'dark';
-                              break;
-                            case 'Delivered':
-                              $badge_color = 'success';
-                              break;
-                            case 'Cancelled':
-                              $badge_color = 'danger';
-                              break;
-                          }
-                          ?>
-                          <span class="badge bg-<?= $badge_color ?>"><?= $status ?></span>
-                        </td>
-                        <td><?= $count ?></td>
-                      </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
+                  <?php endwhile; ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Status Chart -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Order Status Distribution</h5>
+              </div>
+              <div class="card-body">
+                <?php foreach ($order_status as $status => $count): ?>
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="order-status status-<?= strtolower($status) ?>">
+                      <?= $status ?>
+                    </span>
+                    <strong><?= $count ?></strong>
+                  </div>
+                <?php endforeach; ?>
               </div>
             </div>
           </div>
-
-          <!-- Recent Orders -->
           <div class="col-md-6">
-            <div class="card shadow p-3">
-              <h5 class="card-title"><i class="fas fa-clock"></i> Recent Orders</h5>
-              <div class="table-responsive">
-                <table class="table table-sm">
-                  <thead>
-                    <tr>
-                      <th>Order #</th>
-                      <th>Customer</th>
-                      <th>Total</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php while ($order = $recent_orders->fetch_assoc()): ?>
-                      <tr>
-                        <td>#<?= $order['id'] ?></td>
-                        <td><?= htmlspecialchars($order['customer_name']) ?></td>
-                        <td>₹<?= number_format($order['total'], 2) ?></td>
-                        <td>
-                          <?php
-                          $status_color = '';
-                          switch ($order['status'] ?? 'Pending') {
-                            case 'Pending':
-                              $status_color = 'warning';
-                              break;
-                            case 'Confirmed':
-                              $status_color = 'info';
-                              break;
-                            case 'Preparing':
-                              $status_color = 'primary';
-                              break;
-                            case 'Ready':
-                              $status_color = 'success';
-                              break;
-                            case 'Out for Delivery':
-                              $status_color = 'dark';
-                              break;
-                            case 'Delivered':
-                              $status_color = 'success';
-                              break;
-                            case 'Cancelled':
-                              $status_color = 'danger';
-                              break;
-                            default:
-                              $status_color = 'secondary';
-                          }
-                          ?>
-                          <span class="badge bg-<?= $status_color ?>"><?= htmlspecialchars($order['status'] ?? 'Pending') ?></span>
-                        </td>
-                      </tr>
-                    <?php endwhile; ?>
-                  </tbody>
-                </table>
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Quick Actions</h5>
               </div>
-              <div class="text-center mt-2">
-                <a href="orders.php" class="btn btn-sm btn-primary">View All Orders</a>
+              <div class="card-body">
+                <div class="d-grid gap-2">
+                  <a href="add_menu_item.php" class="btn btn-success">
+                    <i class="fas fa-plus me-2"></i>Add Menu Item
+                  </a>
+                  <a href="orders.php" class="btn btn-primary">
+                    <i class="fas fa-list me-2"></i>Manage Orders
+                  </a>
+                  <a href="customers.php" class="btn btn-info">
+                    <i class="fas fa-users me-2"></i>View Customers
+                  </a>
+                  <a href="payments.php" class="btn btn-warning">
+                    <i class="fas fa-credit-card me-2"></i>Payment Reports
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -278,12 +309,7 @@ while ($row = $status_result->fetch_assoc()) {
     </div>
   </div>
 
-  <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
 </body>
 
 </html>
