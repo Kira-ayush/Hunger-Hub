@@ -1,0 +1,308 @@
+/* Navbar Custom Styles */
+.navbar {
+  padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffc107 !important;
+}
+
+.navbar-dark .nav-link {
+  font-size: 1rem;
+  margin-right: 10px;
+  transition: color 0.3s;
+}
+
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link.active {
+  color: #ffc107 !important;
+}
+
+.btn-outline-light:hover {
+  background-color: #ffc107;
+  color: #000;
+  border-color: #ffc107;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* Carousel Custom Styling */
+
+.text-shadow {
+  text-shadow: 2px 2px 5px #000;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.carousel-caption h2 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.carousel-caption p {
+  font-size: 1.1rem;
+  color: #f8f9fa;
+}
+
+/* Make carousel images responsive and cover the container */
+.carousel-item img {
+  width: 100%;
+  height: 100vh;
+  /* full screen height */
+  object-fit: cover;
+}
+
+#about h1 span {
+  color: #ffc107;
+}
+.why-heading {
+  margin-top: -100px; /* adjust this value as needed */
+  margin-bottom: 20px;
+}
+
+
+#about p {
+  font-size: 1.05rem;
+  color: #333;
+}
+#about_img{
+    border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+}
+/* .about-box {
+  background-color: #fff;
+  border-left: 5px solid #ffc107;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-box:hover {
+  background-color: #62d7f8;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  
+} */
+/* From Uiverse.io by suleymanlaarabidev */ 
+.card1 {
+  width: 400px;
+  height: 200px;
+  background: rgb(103, 225, 255);
+  transition: all 0.4s;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+  font-size: 30px;
+  font-weight: 900;
+  overflow: hidden;
+  position: relative;
+}
+
+.card1:hover {
+  border-radius: 15px;
+  cursor: pointer;
+  transform: scale(1.1);
+  background: rgb(103, 151, 255);
+}
+
+.first-content {
+  height: 100%;
+  width: 100%;
+  transition: all 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  position: absolute;
+  z-index: 2;
+}
+
+.card1:hover .first-content {
+  height: 0px;
+  opacity: 0;
+}
+
+.second-content {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+  transition: all 0.4s;
+  font-size: 0px;
+  transform: rotate(90deg) scale(-1);
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+}
+
+.card1:hover .second-content {
+  opacity: 1;
+  font-size: 1.1rem;
+  transform: rotate(0deg);
+}
+.card1 .second-content p {
+  font-size: 0.9rem;               /* Smaller text */
+  font-weight: 400;                /* Normal weight (not bold) */
+  font-family: 'Poppins', sans-serif; /* Stylish, clean font */
+  margin: 0;
+}
+.card img {
+    height: 100%;
+    width: 100%;
+    border-bottom-left-radius: 30%;
+    transition: transform 0.3s ease-in-out;
+    object-fit: cover;
+}
+.card img:hover {
+    transform: scale(1.03);
+}
+.card-body h3 {
+    font-weight: bold;
+    font-family: monospace;
+    font-style: italic;
+}
+.card-body i:hover {
+    color: rgb(247, 153, 46);
+    cursor: pointer;
+}
+.review-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+}
+.review-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background-color: #fffbe6;
+  border-left: 4px solid #ffc107;
+}
+.rating i {
+  font-size: 1rem;
+}
+.step-card {
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+.step-icon {
+  color: #ffc107;
+}
+#stats .border {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#stats .border:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section {
+  background: linear-gradient(to right, #fff, #fff5e6);
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info i {
+  color: #ffc107;
+  font-size: 1.5rem;
+}
+
+.contact-info p {
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+}
+
+.btn-warning {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.login-box {
+  max-width: 450px;
+  margin: auto;
+  padding: 40px;
+  margin-top: 80px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h2 {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 8px;
+}
+
+.btn-warning {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.text-center small a {
+  text-decoration: none;
+}
+
+.register-box {
+  max-width: 500px;
+  margin: auto;
+  padding: 40px;
+  margin-top: 60px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.register-box h2 {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 8px;
+}
+
+.btn-warning {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.text-center small a {
+  text-decoration: none;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  transition: 0.3s ease-in-out;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 5px #000;
+}
