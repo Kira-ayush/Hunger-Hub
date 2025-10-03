@@ -13,6 +13,7 @@ $stmt->execute();
 $result_admin = $stmt->get_result();
 $admin = $result_admin->fetch_assoc();
 $profile_img = $admin['profile_pic'] ?? 'default.png';
+$profile_img = $admin['profile_pic'] ?? 'default.png';
 
 // Handle refund processing
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['process_refund'])) {
@@ -131,6 +132,7 @@ $stats_query = "
         SUM(CASE WHEN payment_status = 'Pending' THEN total ELSE 0 END) as pending_amount,
         SUM(CASE WHEN payment_status = 'Failed' THEN total ELSE 0 END) as failed_amount,
         COUNT(CASE WHEN payment_method = 'COD' THEN 1 END) as cod_count,
+        COUNT(CASE WHEN payment_method = 'UPI' THEN 1 END) as upi_count,
         COUNT(CASE WHEN payment_method = 'Razorpay' THEN 1 END) as razorpay_count,
         COUNT(CASE WHEN payment_method = 'PayPal' THEN 1 END) as paypal_count
     FROM orders 
@@ -360,8 +362,9 @@ $recent_refunds = $conn->query($refunds_query);
                                 <select name="payment_method" class="form-select">
                                     <option value="">All Methods</option>
                                     <option value="COD" <?= $payment_method == 'COD' ? 'selected' : '' ?>>Cash on Delivery</option>
-                                    <option value="Razorpay" <?= $payment_method == 'Razorpay' ? 'selected' : '' ?>>Razorpay</option>
-                                    <option value="PayPal" <?= $payment_method == 'PayPal' ? 'selected' : '' ?>>PayPal</option>
+                                    <option value="UPI" <?= $payment_method == 'UPI' ? 'selected' : '' ?>>UPI Payment</option>
+                                    <option value="Razorpay" <?= $payment_method == 'Razorpay' ? 'selected' : '' ?>>Razorpay (Legacy)</option>
+                                    <option value="PayPal" <?= $payment_method == 'PayPal' ? 'selected' : '' ?>>PayPal (Legacy)</option>
                                 </select>
                             </div>
                             <div class="col-md-3">

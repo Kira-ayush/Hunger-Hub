@@ -1,4 +1,4 @@
-/* Navbar Custom Styles */
+/* Navbar Custom Styles
 .navbar {
   padding: 0.8rem 1rem;
 }
@@ -18,9 +18,9 @@
 .navbar-dark .nav-link:hover,
 .navbar-dark .nav-link.active {
   color: #ffc107 !important;
-}
+} */
 
-.btn-outline-light:hover {
+/* .btn-outline-light:hover {
   background-color: #ffc107;
   color: #000;
   border-color: #ffc107;
@@ -33,7 +33,7 @@
 
 .btn-warning:hover {
   background-color: #e0a800;
-}
+} */
 
 /* Carousel Custom Styling */
 

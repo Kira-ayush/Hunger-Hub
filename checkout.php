@@ -92,18 +92,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['success'] = "Your order has been placed successfully! You can pay cash on delivery.";
       header("Location: order_success.php");
       exit();
+    } else if ($payment_method === 'UPI') {
+      // UPI - redirect to UPI payment page
+      $_SESSION['pending_order_id'] = $order_id;
+      $_SESSION['pending_amount'] = $final_total;
+      header("Location: payment_upi.php");
+      exit();
     } else if ($payment_method === 'RAZORPAY') {
-      // Razorpay - redirect to payment page
-      $_SESSION['pending_order_id'] = $order_id;
-      $_SESSION['pending_amount'] = $final_total;
-      header("Location: payment_razorpay.php");
-      exit();
+      // Razorpay - disabled but keeping for reference
+      $_SESSION['error'] = "Razorpay payment is currently disabled. Please use UPI or Cash on Delivery.";
     } else if ($payment_method === 'PAYPAL') {
-      // PayPal - redirect to PayPal payment page
-      $_SESSION['pending_order_id'] = $order_id;
-      $_SESSION['pending_amount'] = $final_total;
-      header("Location: payment_paypal.php");
-      exit();
+      // PayPal - disabled but keeping for reference
+      $_SESSION['error'] = "PayPal payment is currently disabled. Please use UPI or Cash on Delivery.";
     }
   } else {
     $_SESSION['error'] = "Failed to place order. Please try again.";
@@ -136,15 +136,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="post" id="checkoutForm">
           <div class="mb-3">
             <label class="form-label">Full Name</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control"
+              value="<?= htmlspecialchars($_SESSION['user_name'] ?? '') ?>" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Phone</label>
-            <input type="text" name="phone" class="form-control" required>
+            <input type="text" name="phone" class="form-control"
+              value="<?= htmlspecialchars($_SESSION['user_phone'] ?? '') ?>" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Delivery Address</label>
-            <textarea name="address" class="form-control" required></textarea>
+            <textarea name="address" class="form-control" required><?= htmlspecialchars($_SESSION['user_address'] ?? '') ?></textarea>
           </div>
 
           <!-- Payment Method Selection -->

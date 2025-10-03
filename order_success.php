@@ -7,6 +7,8 @@ if (!isset($_SESSION['success'])) {
 
 $payment_method = $_SESSION['payment_method'] ?? 'COD';
 $transaction_id = $_SESSION['transaction_id'] ?? null;
+$upi_id = $_SESSION['upi_id'] ?? null;
+$payment_details = $_SESSION['payment_details'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +55,11 @@ $transaction_id = $_SESSION['transaction_id'] ?? null;
 
             <div class="alert alert-success">
               <?= htmlspecialchars($_SESSION['success']) ?>
+              <?php if ($payment_method === 'UPI'): ?>
+                <br><small class="text-muted">
+                  <i class="fas fa-shield-alt"></i> Your UPI payment has been processed securely.
+                </small>
+              <?php endif; ?>
             </div>
 
             <!-- Payment Details -->
@@ -67,6 +74,9 @@ $transaction_id = $_SESSION['transaction_id'] ?? null;
                       case 'COD':
                         echo '<i class="fas fa-money-bill-wave text-info"></i> Cash on Delivery';
                         break;
+                      case 'UPI':
+                        echo '<i class="fas fa-mobile-alt text-success"></i> UPI Payment';
+                        break;
                       case 'RAZORPAY':
                         echo '<i class="fas fa-credit-card text-primary"></i> Razorpay';
                         break;
@@ -74,7 +84,7 @@ $transaction_id = $_SESSION['transaction_id'] ?? null;
                         echo '<i class="fab fa-paypal text-primary"></i> PayPal';
                         break;
                       default:
-                        echo '<i class="fas fa-question-circle"></i> ' . $payment_method;
+                        echo '<i class="fas fa-question-circle"></i> ' . htmlspecialchars($payment_method);
                     }
                     ?>
                   </div>
@@ -82,6 +92,18 @@ $transaction_id = $_SESSION['transaction_id'] ?? null;
                     <div class="col-md-6">
                       <strong>Transaction ID:</strong><br>
                       <code><?= htmlspecialchars($transaction_id) ?></code>
+                    </div>
+                  <?php endif; ?>
+                  <?php if ($payment_method === 'UPI' && $upi_id): ?>
+                    <div class="col-md-6 mt-2">
+                      <strong>UPI ID Used:</strong><br>
+                      <small class="text-muted"><?= htmlspecialchars($upi_id) ?></small>
+                    </div>
+                  <?php endif; ?>
+                  <?php if ($payment_details && isset($payment_details['timestamp'])): ?>
+                    <div class="col-md-6 mt-2">
+                      <strong>Payment Time:</strong><br>
+                      <small class="text-muted"><?= htmlspecialchars($payment_details['timestamp']) ?></small>
                     </div>
                   <?php endif; ?>
                 </div>
@@ -155,4 +177,6 @@ $transaction_id = $_SESSION['transaction_id'] ?? null;
 unset($_SESSION['success']);
 unset($_SESSION['payment_method']);
 unset($_SESSION['transaction_id']);
+unset($_SESSION['upi_id']);
+unset($_SESSION['payment_details']);
 ?>

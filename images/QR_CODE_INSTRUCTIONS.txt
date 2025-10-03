@@ -1,0 +1,22 @@
+This is a placeholder for your QR code image.
+
+To add your own QR code:
+
+1. Generate your UPI QR code using any QR generator with your UPI ID: ranchianita2000@okaxis
+
+2. Save the QR code image as: upi_qr_code.png
+
+3. Place it in the images/ folder: 
+   c:\xampp\htdocs\HungerHub\images\upi_qr_code.png
+
+4. The payment page will automatically display your QR code!
+
+QR Code specifications:
+- Format: PNG (recommended) or JPG
+- Size: 250x250 pixels or larger (will be auto-resized)
+- Content: UPI payment link with your UPI ID
+
+Example UPI QR content:
+upi://pay?pa=ranchianita2000@okaxis&pn=HungerHub&am=AMOUNT&cu=INR
+
+The system will automatically show the correct amount for each order.

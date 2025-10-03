@@ -57,7 +57,7 @@ $payment_methods = [
         'processing_time' => 'Instant'
     ],
     'RAZORPAY' => [
-        'enabled' => true,
+        'enabled' => false, // Disabled - only UPI through direct UPI option
         'name' => 'Razorpay',
         'description' => 'Pay securely with UPI, Cards, Netbanking & Wallets',
         'icon' => 'fas fa-credit-card',
@@ -68,7 +68,7 @@ $payment_methods = [
         'supported_methods' => ['card', 'netbanking', 'wallet', 'upi', 'emi']
     ],
     'PAYPAL' => [
-        'enabled' => true,
+        'enabled' => false, // Disabled - not needed
         'name' => 'PayPal',
         'description' => 'Pay securely with PayPal',
         'icon' => 'fab fa-paypal',
@@ -81,7 +81,7 @@ $payment_methods = [
     'UPI' => [
         'enabled' => true,
         'name' => 'UPI Payment',
-        'description' => 'Pay instantly using UPI ID',
+        'description' => 'Pay instantly using UPI ID or scan QR code',
         'icon' => 'fas fa-mobile-alt',
         'min_amount' => 1,
         'max_amount' => 100000,
@@ -305,23 +305,3 @@ define('PAYMENT_STATUS_REFUNDED', 'Refunded');
 define('ORDER_STATUS_PAYMENT_PENDING', 'Payment Pending');
 define('ORDER_STATUS_PAYMENT_CONFIRMED', 'Payment Confirmed');
 define('ORDER_STATUS_PAYMENT_FAILED', 'Payment Failed');
-
-?>
-
-<?php
-// Example usage and testing
-if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
-    echo "<h2>Payment Configuration Test</h2>";
-    echo "<h3>Available Payment Methods:</h3>";
-    foreach (getPaymentMethods() as $method => $config) {
-        echo "<p><strong>{$config['name']}</strong>: {$config['description']}</p>";
-    }
-
-    echo "<h3>Payment Fee Calculation:</h3>";
-    $test_amount = 1000;
-    foreach (getPaymentMethods() as $method => $config) {
-        $fee = calculatePaymentFee($test_amount, $method);
-        echo "<p>{$config['name']}: ₹{$fee} for order of ₹{$test_amount}</p>";
-    }
-}
-?>
